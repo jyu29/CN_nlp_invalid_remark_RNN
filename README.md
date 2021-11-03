@@ -1,5 +1,4 @@
-
-lastest version 2021
-invalid remark binary classfication for tmall and jd
-deep learning model
+version:2021_v0
+data: masterdata_v2
+update time: 2021-10-15
 
