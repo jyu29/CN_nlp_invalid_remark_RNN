@@ -1,10 +1,9 @@
+'''processing and prediction '''
 # author: jyu29
-# update time: 2021-11-03
-
+# create time: 2021-08
 
 # read latest row number since last prediction
 import pandas as pd
-import numpy as np
 import psycopg2
 from sqlalchemy import create_engine 
 import jieba
@@ -153,20 +152,16 @@ def user_comment_predict(data):
     data['clean_text'] = data['custom_mark'].apply(remove_punctuation)
 
     data['cut_text'] = data['clean_text'].apply(lambda x: " ".join([w for w in list(jieba.cut(x)) if w not in stopword]))
-    
-    ### manual add rule ###
-    data.loc[data['cut_text'].str.contains('AG'), 'cut_text'] = '谢谢 老板'
-    
     print('clean_text:',data['cut_text'].values)
     sequence_data = convert_text_to_sequence(data['cut_text'])
     
-    prediction = rnnmodel.predict(sequence_data)
-    data['invalid_remark'] = prediction
-    data['invalid_remark'] = np.where(data['invalid_remark']>=0.5,1,0)
-#         yhat = int(predict_binary_class(prediction))
-#         data['invalid_remark'] = yhat
-#     except Exception as e:
-#         data['invalid_remark'] = 1
+    try:
+    
+        prediction = rnnmodel.predict(sequence_data)
+        yhat = int(predict_binary_class(prediction))
+        data['invalid_remark'] = yhat
+    except Exception as e:
+        data['invalid_remark'] = 1
     
     return data[['seq_id','invalid_remark']]
 
