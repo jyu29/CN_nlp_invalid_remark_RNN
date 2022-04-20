@@ -1,0 +1,47 @@
+dmart:
+  dbname: dw
+  username: jyu29
+  password: bS!3ajc#VOcLbvAR0y
+  host: 10.50.8.227
+  port: 60906
+
+dmart_textminer:
+  dbname: dw
+  username: text_miner
+  password: gQ@8fwta2pFtZayxxi
+  host: 10.50.8.227
+  port: 60906
+
+ali_dmart:
+  username: text_miner
+  password: gQ@8fwta2pFtZayxxi
+
+remote_data_path:
+  raw: /data/smartdata/invalid_remark/raw/
+  preproces: /Users/JOE/Desktop/
+  processed: /Users/JOE/Desktop/
+  dictionary: /Users/JOE/Desktop/dev/invalid_remark/src/data/dictionary/
+
+sql_parameter:
+  seq_id: 1
+
+business_rule:
+  invalid_keyword: ['同城购', 'AG', '自提', '定时送']
+  valid_keyword: ['有效', '锁单','扣单','余单撤销','各一件','缺货',
+  '邮政', '韵达',
+  'EMS', '圆通',
+  'ems', '天天',
+  '顺丰', '申通',
+  '百世', '中通',
+  '汇通', '德邦']
+  valid_keyword_v3: ['有效', '锁单','扣单','余单撤销','各一件','不要拆单','缺货']
+
+model_parameter:
+  max_words: 5000
+  max_len: 300
+  data_split: 0.8
+  vocab_size: 5000
+  embeddiing_dim: 256
+  batch_size: 64
+  epochs: 6
+  learning_rate: 0.001
